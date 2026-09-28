@@ -6,7 +6,7 @@ import { ValueStrip } from "@/components/ValueStrip";
 
 export default function Home() {
   return (
-    <SiteShell>
+    <SiteShell home>
       <Hero />
       <BeliefBand />
       <HowItWorks />

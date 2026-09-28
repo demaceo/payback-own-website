@@ -5,13 +5,14 @@ import { IconSprite } from "./IconSprite";
 import { PageEffects } from "./PageEffects";
 
 /** Chrome shared by every page: icon sprite, header, footer and the progressive-enhancement island. */
-export function SiteShell({ children }: { children: ReactNode }) {
+/** `home` marks the home page, where section links are in-page anchors. */
+export function SiteShell({ children, home = false }: { children: ReactNode; home?: boolean }) {
   return (
     <>
       <IconSprite />
-      <Header />
+      <Header home={home} />
       <main>{children}</main>
-      <Footer />
+      <Footer home={home} />
       <PageEffects />
     </>
   );

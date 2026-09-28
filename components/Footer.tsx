@@ -1,17 +1,18 @@
 import Link from "next/link";
+import { HomeAnchor } from "./HomeAnchor";
 import { CONTACT_PATH, SOCIAL } from "@/lib/site";
 import { Icon } from "./Icon";
 
-export function Footer() {
+export function Footer({ home }: { home: boolean }) {
   return (
     <footer>
       <div className="wrap foot">
         <div>
-          <Link className="logo" href="/#top" aria-label="Payback home">
+          <HomeAnchor home={home} hash="top" className="logo" aria-label="Payback home">
             <svg className="logo-lockup" aria-hidden="true" focusable="false">
               <use href="#i-lockup" />
             </svg>
-          </Link>
+          </HomeAnchor>
           <p className="copy">
             © {new Date().getFullYear()} Payback Digital, Inc. All rights reserved. ·{" "}
             <Link className="foot-link" href={CONTACT_PATH}>

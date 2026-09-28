@@ -14,7 +14,7 @@ export function StoreBadges({ className, id }: Props) {
             key={platform}
             className="store"
             data-store={platform}
-            href={href ?? "/#get"}
+            href={href ?? "#get"}
             aria-label={label}
             {...(href && { target: "_blank", rel: "noopener noreferrer" })}
           >
