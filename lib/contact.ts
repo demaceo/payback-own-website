@@ -117,9 +117,15 @@ export async function sendContactEmail(
   }
 }
 
+export const CONTACT_ENV = ["RESEND_API_KEY", "CONTACT_TO_EMAIL", "CONTACT_FROM_EMAIL"] as const;
+
+/** Names (never values) of the required env vars that are unset or blank. */
+export function missingContactEnv(env: Record<string, string | undefined> = process.env): string[] {
+  return CONTACT_ENV.filter((k) => !env[k]?.trim());
+}
+
 /** Reads the form's server config from env; null means the form isn't set up yet. */
 export function configFromEnv(env: Record<string, string | undefined> = process.env): ContactConfig | null {
-  const { RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL } = env;
-  if (!RESEND_API_KEY || !CONTACT_TO_EMAIL || !CONTACT_FROM_EMAIL) return null;
-  return { apiKey: RESEND_API_KEY, to: CONTACT_TO_EMAIL, from: CONTACT_FROM_EMAIL };
+  if (missingContactEnv(env).length) return null;
+  return { apiKey: env.RESEND_API_KEY!.trim(), to: env.CONTACT_TO_EMAIL!.trim(), from: env.CONTACT_FROM_EMAIL!.trim() };
 }

@@ -4,6 +4,7 @@ import { contactTokenSecret } from "@/lib/contact-secret";
 import {
   checkToken,
   configFromEnv,
+  missingContactEnv,
   describeFailure,
   readInput,
   sendContactEmail,
@@ -31,7 +32,7 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
 
   const config = configFromEnv();
   if (!config) {
-    console.error("[contact] RESEND_API_KEY, CONTACT_TO_EMAIL or CONTACT_FROM_EMAIL is not set");
+    console.error(`[contact] missing env: ${missingContactEnv().join(", ")}`);
     return { status: "error", message: "The contact form isn't available right now. Please try again later.", values };
   }
 

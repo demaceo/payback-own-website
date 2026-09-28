@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { createServer } from "node:http";
 import { after, before, describe, it } from "node:test";
 import {
-  buildEmail, checkToken, configFromEnv, describeFailure, issueToken, readInput, sendContactEmail, validate,
+  buildEmail, checkToken, configFromEnv, describeFailure, issueToken, missingContactEnv, readInput, sendContactEmail, validate,
 } from "../lib/contact.ts";
 
 const valid = { name: "Jane Smith", email: "jane@example.com", subject: "Demo", message: "I'd love a demo next week." };
@@ -53,6 +53,13 @@ describe("configFromEnv", () => {
   it("needs all three vars", () => {
     assert.equal(configFromEnv({ RESEND_API_KEY: "k", CONTACT_TO_EMAIL: "t" }), null);
     assert.deepEqual(configFromEnv({ RESEND_API_KEY: "k", CONTACT_TO_EMAIL: "t", CONTACT_FROM_EMAIL: "f" }), { apiKey: "k", to: "t", from: "f" });
+  });
+  it("names exactly which vars are missing or blank, never their values", () => {
+    assert.deepEqual(missingContactEnv({}), ["RESEND_API_KEY", "CONTACT_TO_EMAIL", "CONTACT_FROM_EMAIL"]);
+    assert.deepEqual(missingContactEnv({ RESEND_API_KEY: "re_secret", CONTACT_TO_EMAIL: "  ", CONTACT_FROM_EMAIL: "f" }), ["CONTACT_TO_EMAIL"]);
+  });
+  it("trims stray whitespace from pasted values", () => {
+    assert.deepEqual(configFromEnv({ RESEND_API_KEY: " k\n", CONTACT_TO_EMAIL: "t ", CONTACT_FROM_EMAIL: " f" }), { apiKey: "k", to: "t", from: "f" });
   });
 });
 
