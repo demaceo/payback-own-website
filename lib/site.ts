@@ -25,6 +25,9 @@ export const SITE_URL = (() => {
   return "http://localhost:3000";
 })();
 
+/** Contact page (same path the previous Framer site used, so old links keep working). */
+export const CONTACT_PATH = "/contact";
+
 /** Short link encoded in the QR code; redirects to the right store by device. */
 export const DOWNLOAD_PATH = "/download";
 
