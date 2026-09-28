@@ -23,16 +23,16 @@ export function VaultIllustration() {
       <g opacity=".22" fill="#fff">
         <path d="M100 84v90l-74-38V46z" />
       </g>
-      <circle cx="63" cy="122" r="23" fill="rgba(255,255,255,.15)" />
-      <path d="M55 119v-6a8 8 0 0 1 16 0v6" stroke="#fff" strokeWidth="3.6" strokeLinecap="round" />
-      <rect x="52" y="119" width="22" height="17" rx="4.5" fill="#fff" />
+      <circle cx="63" cy="110" r="23" fill="rgba(255,255,255,.15)" />
+      <path d="M55 107v-6a8 8 0 0 1 16 0v6" stroke="#fff" strokeWidth="3.6" strokeLinecap="round" />
+      <rect x="52" y="107" width="22" height="17" rx="4.5" fill="#fff" />
       <path
-        d="M137 100l17 7.5v15c0 11-7.5 18.5-17 22.5-9.5-4-17-11.5-17-22.5v-15z"
+        d="M137 88l17 7.5v15c0 11-7.5 18.5-17 22.5-9.5-4-17-11.5-17-22.5v-15z"
         fill="rgba(255,255,255,.16)"
         stroke="#fff"
         strokeWidth="3"
       />
-      <path d="M137 111v19M130 118h14" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" />
+      <path d="M137 99v19M130 106h14" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" />
     </svg>
   );
 }
