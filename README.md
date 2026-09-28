@@ -44,23 +44,28 @@ Requires Node.js 20.9 or newer.
 
 ## Contact form
 
-`/contact` emails each submission to the team through [Resend](https://resend.com). The visitor's address is set as reply-to.
+`/contact` sends each submission to the **HubSpot form the previous site used**: portal `6769602`, form
+`e5c4c31c-…`, set in `HUBSPOT_FORM` in `lib/site.ts`. Submissions land in the same HubSpot contacts, form
+submissions and notification workflows as before. It uses HubSpot's public, unauthenticated
+[Forms API v3](https://developers.hubspot.com/docs/api-reference/legacy/marketing/forms/v3-legacy/submit-data-unauthenticated),
+so there's **no API key and nothing to configure**.
 
-Environment variables (Vercel → Project → Settings → Environment Variables, Production and Preview):
+The fields match that HubSpot form:
+- `firstname`, `lastname`, `email`, `message`
+- optional `phone`
+- `choose_your_role`, the "I'm interested in" checkboxes joined with `;`
 
-| Key | Example | Notes |
-| --- | --- | --- |
-| `RESEND_API_KEY` | `re_…` | Secret. Sending-only key scoped to the verified domain. |
-| `CONTACT_TO_EMAIL` | `team@paybackdigital.com` | Inbox that receives submissions. |
-| `CONTACT_FROM_EMAIL` | `Payback Website <contact@notifications.paybackdigital.com>` | Must use the domain verified in Resend. |
+Old `/#form` links (the previous site's form anchor) forward to `/contact`.
 
-If any of these are missing, the page still renders and the form replies that it's unavailable. Spam protection has no
-third-party script:
+HubSpot's endpoint does very little validation of its own, so the server validates everything first. Spam
+protection uses no third-party script:
 - a hidden honeypot field
 - a signed "form issued at" token, so bots can't post without loading the page, and submissions under 3 seconds are ignored
 - server-side validation, including a cap on links
 
-The page renders per request so every visitor gets a fresh token.
+The token is signed with a secret generated at build time. Optionally, set `CONTACT_TOKEN_SECRET` in Vercel
+to keep tokens valid across deploys. Submission failures are logged as
+`[contact] HubSpot error <status>: <errorType>`, without the visitor's values.
 
 ## Deployment
 

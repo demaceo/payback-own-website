@@ -318,3 +318,15 @@ h1,h2,h3,.cta-kick,.band p.v{text-wrap:balance}
   .contact-form{grid-template-columns:1fr}
   .form-foot .btn{width:100%}
 }
+.field .opt,.interests legend .opt{font-weight:500;color:#A9AECB}
+.interests{border:0;padding:0;margin:0;min-width:0}
+.interests legend{font-size:14px;font-weight:700;color:#EFEEFF;padding:0;margin-bottom:9px}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.check{display:flex;align-items:center;gap:10px;min-height:44px;padding:10px 12px;border-radius:12px;cursor:pointer;
+  background:rgba(5,6,14,.35);border:1px solid rgba(255,255,255,.12);font-size:14.5px;font-weight:600;color:#E4E2FF;
+  transition:border-color .2s,background .2s}
+.check:hover{border-color:rgba(255,255,255,.28)}
+.check input{width:18px;height:18px;flex:0 0 18px;margin:0;accent-color:var(--violet-lt);cursor:pointer}
+.check:has(input:checked){border-color:var(--violet-lt);background:rgba(124,116,255,.16)}
+.check:has(input:focus-visible){outline:2px solid var(--violet-lt);outline-offset:2px}
+@media (max-width:680px){.checks{grid-template-columns:1fr}}

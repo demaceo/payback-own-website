@@ -28,6 +28,12 @@ export const SITE_URL = (() => {
 /** Contact page (same path the previous Framer site used, so old links keep working). */
 export const CONTACT_PATH = "/contact";
 
+/**
+ * HubSpot form that receives contact submissions (the same one the previous site used).
+ * Both IDs are public: HubSpot form embeds ship them to every visitor's browser.
+ */
+export const HUBSPOT_FORM = { portalId: "6769602", formGuid: "e5c4c31c-4ee9-4174-8b78-647c9c79e0ae" } as const;
+
 /** Short link encoded in the QR code; redirects to the right store by device. */
 export const DOWNLOAD_PATH = "/download";
 
