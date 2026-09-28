@@ -23,7 +23,10 @@ Requires Node.js 20.9 or newer.
 | Page sections | `components/*.tsx`, composed in `app/page.tsx` |
 | Styles and brand tokens | `app/globals.css` (`:root` variables) |
 | Title, description, Open Graph | `SITE` in `lib/site.ts`, wired in `app/layout.tsx` |
-| Favicon / share image | `app/icon.*`, `app/apple-icon.*`, `app/opengraph-image.*` (Next.js file conventions) |
+| Tab icon | `app/icon.svg` (brand mark on a `#05060E` tile) and `app/favicon.ico` (16/32/48 px, legacy browsers) |
+| iOS home-screen icon | `app/apple-icon.png` (180×180) |
+| Android icons / web manifest | `public/icons/icon-192.png`, `public/icons/icon-512.png`, `app/manifest.ts` |
+| Social share image | `app/opengraph-image.png` + `app/twitter-image.png` (1200×630) and their `.alt.txt` files |
 
 ## How it works
 
