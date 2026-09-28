@@ -8,10 +8,11 @@ export type IconName =
   | "play" | "user" | "user-check" | "users" | "download" | "search" | "merge" | "trash"
   | "x" | "linkedin" | "instagram" | "facebook" | "apple" | "play-store";
 
-/** App download URLs. Leave as null until the store listing is live; badges then link to #get. */
+/** App download URLs. Set one to null while a listing is unavailable; its badges then link to #get. */
 export const STORE_LINKS: Record<Platform, string | null> = {
-  ios: null, // App Store / TestFlight URL
-  android: null, // Google Play URL
+  // Region-neutral: Apple forwards each visitor to their own storefront.
+  ios: "https://apps.apple.com/app/id6754859483",
+  android: "https://play.google.com/store/apps/details?id=com.milehighinterface.payback",
 };
 
 /**
