@@ -1,11 +1,13 @@
 import "server-only";
-import { createHmac } from "node:crypto";
 
 /**
- * Secret for signing contact-form tokens, derived from the Resend key so no
- * extra env var is needed. Server-only: never export this from a "use server" file.
+ * Secret for signing contact-form tokens. Uses CONTACT_TOKEN_SECRET when set;
+ * otherwise a random value generated once per build (see next.config.ts), so
+ * there is nothing to configure. Server-only: never export this from a
+ * "use server" file.
  */
 export function contactTokenSecret(): string {
-  const key = process.env.RESEND_API_KEY ?? "contact-form-unconfigured";
-  return createHmac("sha256", key).update("payback-contact-form-token").digest("hex");
+  const secret = process.env.CONTACT_TOKEN_SECRET?.trim() || process.env.CONTACT_TOKEN_BUILD_SECRET;
+  if (!secret) throw new Error("contact token secret unavailable");
+  return secret;
 }

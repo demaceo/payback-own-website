@@ -1,17 +1,14 @@
 "use server";
 
+import { cookies, headers } from "next/headers";
 import { contactTokenSecret } from "@/lib/contact-secret";
-import {
-  checkToken,
-  configFromEnv,
-  describeFailure,
-  readInput,
-  sendContactEmail,
-  validate,
-  type ContactState,
-} from "@/lib/contact";
+import { checkToken, clientIp, describeFailure, readInput, submitToHubSpot, validate, type ContactState } from "@/lib/contact";
+import { CONTACT_PATH, HUBSPOT_FORM, SITE_URL } from "@/lib/site";
 
-const SUCCESS: ContactState = { status: "success", message: "Thanks, your message is on its way. We'll get back to you soon." };
+const SUCCESS: ContactState = {
+  status: "success",
+  message: "Thanks, we've got your message. The Payback team will be in touch soon.",
+};
 
 export async function submitContact(_prev: ContactState, formData: FormData): Promise<ContactState> {
   // Bots fill every field; the honeypot is visually hidden from people. Pretend it worked.
@@ -23,22 +20,28 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
     return { status: "error", message: "This form has expired. Please reload the page and try again." };
   }
 
-  const values = readInput((k) => formData.get(k));
+  const values = readInput((k) => formData.get(k), (k) => formData.getAll(k));
   const fieldErrors = validate(values);
   if (Object.keys(fieldErrors).length) {
     return { status: "error", message: "Please fix the highlighted fields.", fieldErrors, values };
   }
 
-  const config = configFromEnv();
-  if (!config) {
-    console.error("[contact] RESEND_API_KEY, CONTACT_TO_EMAIL or CONTACT_FROM_EMAIL is not set");
-    return { status: "error", message: "The contact form isn't available right now. Please try again later.", values };
-  }
-
-  const result = await sendContactEmail(values, config);
+  const [h, c] = await Promise.all([headers(), cookies()]);
+  const result = await submitToHubSpot(
+    values,
+    {
+      pageUri: `${SITE_URL}${CONTACT_PATH}`,
+      pageName: "Contact · Payback",
+      hutk: c.get("hubspotutk")?.value, // present only if HubSpot tracking has run for this visitor
+      ipAddress: clientIp((n) => h.get(n)),
+    },
+    // HUBSPOT_API_BASE lets local end-to-end tests point at a mock server; unset in production.
+    { ...HUBSPOT_FORM, apiBase: process.env.HUBSPOT_API_BASE || undefined },
+  );
   if (!result.ok) {
-    console.error(`[contact] Resend error ${result.status}: ${result.message}`);
-    return { status: "error", message: describeFailure(result.status), values };
+    // Error types and HubSpot's message only; never the visitor's field values.
+    console.error(`[contact] HubSpot error ${result.status}: ${result.errorTypes.join(",") || "-"} ${result.message}`);
+    return { status: "error", ...describeFailure(result), values };
   }
   return SUCCESS;
 }

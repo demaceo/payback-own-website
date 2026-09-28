@@ -1,3 +1,4 @@
+import { randomBytes } from "node:crypto";
 import type { NextConfig } from "next";
 
 const securityHeaders = [
@@ -9,6 +10,9 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Inlined at build time, so every function in one deployment shares it. Only read
+  // from server-only code (lib/contact-secret.ts); CONTACT_TOKEN_SECRET overrides it.
+  env: { CONTACT_TOKEN_BUILD_SECRET: randomBytes(32).toString("hex") },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

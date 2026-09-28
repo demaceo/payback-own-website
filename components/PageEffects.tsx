@@ -16,6 +16,13 @@ function detectPlatform(): Platform | null {
  */
 export function PageEffects() {
   useEffect(() => {
+    // The previous site's form lived at /#form; send those old links to the contact page.
+    // (The URL hash never reaches the server, so this can't be a server-side redirect.)
+    if (location.pathname === "/" && location.hash === "#form") {
+      location.replace("/contact");
+      return;
+    }
+
     const cleanups: (() => void)[] = [];
     const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
