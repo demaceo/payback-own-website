@@ -159,7 +159,7 @@ h1 .accent{background:linear-gradient(100deg,#5B7BFF,#7C74FF);-webkit-background
 .camp:hover .bx{transform:translateY(-3px);box-shadow:0 8px 20px rgba(16,20,50,.17)}
 .camp span{display:block;font-size:12.5px;color:#2C3145;margin-top:8px;font-weight:700}
 .vault-wrap{display:grid;place-items:center}
-.vault{width:190px;height:auto;filter:drop-shadow(0 18px 34px rgba(60,52,190,.34))}
+.vault{width:140px;height:auto;filter:drop-shadow(0 18px 34px rgba(60,52,190,.34))}
 .no-one{display:flex;align-items:center;justify-content:center;gap:11px;margin-top:46px;
   font-weight:700;font-size:clamp(15px,1.55vw,18px);letter-spacing:-.012em;text-align:center}
 .no-one .badge{width:26px;height:26px;border-radius:50%;background:var(--violet);display:grid;
