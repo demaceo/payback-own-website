@@ -34,27 +34,6 @@ export function PageEffects() {
       }
     }
 
-    // In-page links (Download CTA, "Grab the beta", the logo's back-to-top)
-    // scroll via JS instead of a native #hash jump. WebKit's native hash-jump,
-    // combined with the scroll-behavior:smooth above, leaves touch scrolling
-    // stuck afterwards — most visibly as "can't scroll back up" once the
-    // Download button has jumped the page down to the store badges.
-    const onAnchorClick = (e: MouseEvent) => {
-      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      const link = (e.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
-      const id = link?.getAttribute("href")?.slice(1);
-      const target = id ? document.getElementById(id) : null;
-      if (!link || !target) return;
-      e.preventDefault();
-      target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-      history.pushState(null, "", `#${id}`);
-      target.setAttribute("tabindex", "-1");
-      target.focus({ preventScroll: true });
-      target.addEventListener("blur", () => target.removeAttribute("tabindex"), { once: true });
-    };
-    addEventListener("click", onAnchorClick);
-    cleanups.push(() => removeEventListener("click", onAnchorClick));
-
     // Product Hunt welcome strip.
     if (/producthunt/i.test(`${document.referrer || ""} ${location.search}`)) {
       document.getElementById("ph-bar")?.classList.add("on");
