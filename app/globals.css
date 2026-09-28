@@ -43,7 +43,8 @@ header.stuck{background:rgba(5,6,14,.97);box-shadow:0 6px 26px rgba(0,0,0,.5)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(91,91,246,.55)}
 
 /* ---------- Hero ---------- */
-.hero{position:relative;overflow:hidden;padding:70px 0 88px}
+/* clip, not hidden: a hidden box is still scrollable by #hash jumps and focus, which would shift the hero's top out of view. */
+.hero{position:relative;overflow:clip;padding:70px 0 88px}
 .hero-bg{position:absolute;inset:0;pointer-events:none;z-index:0}
 .hero-bg::before{content:"";position:absolute;top:-24%;right:-12%;width:1000px;height:1000px;
   background:radial-gradient(circle,rgba(79,123,255,.32) 0%,rgba(91,91,246,.14) 38%,transparent 66%)}
