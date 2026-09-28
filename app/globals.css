@@ -280,3 +280,40 @@ h1,h2,h3,.cta-kick,.band p.v{text-wrap:balance}
   .cta-note{display:block}
   .cta-note .ico{display:inline-block;vertical-align:-3px;margin:0 6px 0 0}
 }
+
+/* ---------- Contact page ---------- */
+.contact{padding:64px 0 88px}
+.contact-grid{position:relative;z-index:2;display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+.contact-card{margin-top:0;display:block;padding:36px}
+.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:18px 16px}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.field.full,.form-foot.full{grid-column:1/-1}
+.field label{font-size:14px;font-weight:700;color:#EFEEFF}
+.field input,.field textarea{font:inherit;font-size:16px;color:#fff;background:rgba(5,6,14,.55);
+  border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:12px 14px;width:100%;
+  transition:border-color .2s,box-shadow .2s}
+.field textarea{resize:vertical;min-height:140px;line-height:1.5}
+.field input::placeholder,.field textarea::placeholder{color:#8F95B2}
+.field input:focus-visible,.field textarea:focus-visible{outline:none;border-color:var(--violet-lt);
+  box-shadow:0 0 0 3px rgba(124,116,255,.35)}
+.field [aria-invalid="true"]{border-color:#FF8A8A}
+/* .cta-card p styles the marketing card copy; reset them for form text. */
+.contact-card .field-err,.contact-card .form-status{margin:0;max-width:none;line-height:1.45}
+.contact-card .field-err{font-size:13.5px;font-weight:600;color:#FFB4B4}
+.form-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:4px}
+.contact-card .form-status{font-size:14.5px;font-weight:600;color:#DEDCFF;min-height:1px;flex:1 1 220px}
+.contact-card .form-status.err{color:#FFB4B4}
+.contact-card .form-status.ok{font-size:17px;color:#6EE7A0;padding:12px 0}
+.contact-form .btn[disabled]{opacity:.7;cursor:progress;transform:none}
+.hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.foot-link{color:#C2C7DA;text-decoration:underline;text-underline-offset:3px}
+.foot-link:hover{color:#fff}
+@media (max-width:1020px){
+  .contact-grid{grid-template-columns:1fr;gap:36px}
+}
+@media (max-width:680px){
+  .contact{padding:40px 0 60px}
+  .contact-card{padding:24px 18px;text-align:left}
+  .contact-form{grid-template-columns:1fr}
+  .form-foot .btn{width:100%}
+}
