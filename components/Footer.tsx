@@ -1,6 +1,5 @@
-import Link from "next/link";
 import { HomeAnchor } from "./HomeAnchor";
-import { CONTACT_PATH, SOCIAL } from "@/lib/site";
+import { SOCIAL, SUPPORT_EMAIL } from "@/lib/site";
 import { Icon } from "./Icon";
 
 export function Footer({ home }: { home: boolean }) {
@@ -14,10 +13,13 @@ export function Footer({ home }: { home: boolean }) {
             </svg>
           </HomeAnchor>
           <p className="copy">
-            © {new Date().getFullYear()} Payback Digital, Inc. All rights reserved. ·{" "}
-            <Link className="foot-link" href={CONTACT_PATH}>
-              Contact
-            </Link>
+            © {new Date().getFullYear()} Payback Digital, Inc. All rights reserved.{" "}
+            <span className="sep" aria-hidden="true">
+              ·{" "}
+            </span>
+            <a className="foot-link" href={`mailto:${SUPPORT_EMAIL}`}>
+              {SUPPORT_EMAIL}
+            </a>
           </p>
         </div>
         <div className="social">
