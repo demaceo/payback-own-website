@@ -25,6 +25,9 @@ export const SITE_URL = (() => {
   return "http://localhost:3000";
 })();
 
+/** Public support address shown in the footer. */
+export const SUPPORT_EMAIL = "Support@paybackdigital.com";
+
 /** Contact page (same path the previous Framer site used, so old links keep working). */
 export const CONTACT_PATH = "/contact";
 

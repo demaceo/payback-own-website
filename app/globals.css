@@ -309,6 +309,11 @@ h1,h2,h3,.cta-kick,.band p.v{text-wrap:balance}
 .hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 .foot-link{color:#C2C7DA;text-decoration:underline;text-underline-offset:3px}
 .foot-link:hover{color:#fff}
+/* Phones: the address sits on its own centered line (no dangling separator) with a 44px tap area. */
+@media (max-width:680px){
+  .foot .sep{display:none}
+  .foot-link{display:block;width:fit-content;margin:0 auto;padding:14px 6px}
+}
 @media (max-width:1020px){
   .contact-grid{grid-template-columns:1fr;gap:36px}
 }

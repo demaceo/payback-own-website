@@ -22,6 +22,7 @@ Requires Node.js 20.9 or newer.
 | App Store / Google Play URLs | `STORE_LINKS` in `lib/site.ts` |
 | Copy lists (pillars, CAMPS steps, value strip, social links) | `lib/site.ts` |
 | Page sections | `components/*.tsx`, composed in `app/page.tsx` inside `SiteShell` (shared header/footer) |
+| Support email shown in the footer | `SUPPORT_EMAIL` in `lib/site.ts` |
 | Contact page and form | `app/contact/page.tsx`, `components/ContactForm.tsx`, logic in `lib/contact.ts` |
 | Styles and brand tokens | `app/globals.css` (`:root` variables) |
 | Title, description, Open Graph | `SITE` in `lib/site.ts`, wired in `app/layout.tsx` |
